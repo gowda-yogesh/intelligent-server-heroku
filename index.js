@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const bcrypt = require("bcrypt");
 const knex = require("knex");
 const PORT = process.env.PORT || 5000;
 
@@ -34,7 +33,13 @@ express()
       .then(user => {
         console.log("hash value  = ", user);
         console.log("hash value  = ", user[0].hash);
-        const isValid = bcrypt.compareSync(req.body.password, user[0].hash);
+        // const isValid = bcrypt.compareSync(req.body.password, user[0].hash);
+        const isValid;
+        if (user[[0].hash === req.body.password]) {
+          isValid = true;
+        } else {
+          isValid = false;
+        }
         console.log("Validation = ", isValid);
         if (isValid) {
           return db.select('*')
@@ -56,13 +61,13 @@ express()
 
     res.json("register page open ");
 
-    // console.log("hello its the reguster");
+    console.log("hello its the reguster");
 
-    // const { name, password, email } = req.body;
+    const { name, password, email } = req.body;
 
-    // console.log("name", name);
-    // console.log("password", password);
-    // console.log("password type", typeof (password));
+    console.log("name", name);
+    console.log("password", password);
+    console.log("password type", typeof (password));
 
     // const saltRounds = 10;
     // const hash = bcrypt.hashSync(String(password), saltRounds);
@@ -74,30 +79,30 @@ express()
     // console.log("correct", correct);
     // console.log("worng", wrong);
 
-    // db.transaction(trx => {
-    //     trx.insert({
-    //         hash: hash,
-    //         email: email
-    //     })
-    //         .into('login')
-    //         .returning('email')
-    //         .then(loginEmail => {
-    //             //return is extremely imp else program hangs;
-    //             return trx('users')
-    //                 .returning('*')
-    //                 .insert({
-    //                     email: loginEmail[0],
-    //                     name: name,
-    //                     joined: new Date()
-    //                 })
-    //                 .then(user => { res.json(user[0]) })
-    //         })
-    //         //most important line trx.commit
-    //         .then(trx.commit)
-    //         .catch(trx.rollback)
+    db.transaction(trx => {
+      trx.insert({
+        hash: password,
+        email: email
+      })
+        .into('login')
+        .returning('email')
+        .then(loginEmail => {
+          //return is extremely imp else program hangs;
+          return trx('users')
+            .returning('*')
+            .insert({
+              email: loginEmail[0],
+              name: name,
+              joined: new Date()
+            })
+            .then(user => { res.json(user[0]) })
+        })
+        //most important line trx.commit
+        .then(trx.commit)
+        .catch(trx.rollback)
 
 
-    // }).catch(err => { res.status(400).json("could not register") });
+    }).catch(err => { res.status(400).json("could not register") });
 
   })
 
