@@ -101,7 +101,7 @@ express()
               joined: new Date()
             })
             .then(user => { res.json(user[0]) })
-            .catch(err => console.log("error in transition of database ", err))
+          // .catch(err => console.log("error in transition of database ", err))
         })
         //most important line trx.commit
         .then(trx.commit)
