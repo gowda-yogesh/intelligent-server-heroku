@@ -18,7 +18,8 @@
     "ejs": "^2.5.6",
     "express": "^4.15.2",
     "knex": "^0.21.5",
-    "node-pre-gyp": "0.6.x"
+    "node-pre-gyp": "0.6.x",
+    "pg": "^8.3.2"
   },
   "devDependencies": {
     "aws-sdk": "2.x",
