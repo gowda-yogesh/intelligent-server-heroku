@@ -20,9 +20,9 @@ express()
   .get("/", (req, res) => { res.json("YOGESH ITS WORKING "); })
   .post("/signin", (req, res) => {
 
-    res.json("signin page open ");
-    // console.log("post signin ", ++p);
-    // console.log("signin req.body", JSON.parse(req.body));
+    // res.json("signin page open ");
+    console.log("post signin ", ++p);
+    console.log("signin req.body", JSON.parse(req.body));
 
     console.log(req.body);
 
@@ -35,7 +35,7 @@ express()
         console.log("hash value  = ", user[0].hash);
         // const isValid = bcrypt.compareSync(req.body.password, user[0].hash);
         let isValid;
-        if (user[[0].hash === req.body.password]) {
+        if (user[0].hash == req.body.password) {
           isValid = true;
         } else {
           isValid = false;
@@ -59,7 +59,7 @@ express()
   })
   .post("/register", (req, res) => {
 
-    res.json("register page open ");
+    // res.json("register page open ");
 
     console.log("hello its the reguster");
 
@@ -96,6 +96,7 @@ express()
               joined: new Date()
             })
             .then(user => { res.json(user[0]) })
+            .catch(err => console.log("error in transition of database ", err))
         })
         //most important line trx.commit
         .then(trx.commit)
