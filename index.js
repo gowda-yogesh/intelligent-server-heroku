@@ -14,6 +14,8 @@ const db = knex({
   }
 });
 
+let u = 0, g = 0, p = 0;
+
 express()
   .use(bodyParser.json())
   .use(cors())
