@@ -1,16 +1,11 @@
 const express = require('express')
 const cors = require("cors")
 const bodyParser = require("body-parser")
-// const path = require('path')
 const PORT = process.env.PORT || 5000
 
 express()
-  // .use(express.static(path.join(__dirname, 'public')))
   .use(bodyParser.json())
   .use(cors())
-  // .set('views', path.join(__dirname, 'views'))
-  // .set('view engine', 'ejs')
-  // .get('/', (req, res) => res.render('pages/index'))
   .get("/", (req, res) => { res.json("YOGESH ITS WORKING "); })
   .post("/signin", (req, res) => {
 
