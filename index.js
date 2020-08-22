@@ -79,6 +79,8 @@ express()
     // console.log("correct", correct);
     // console.log("worng", wrong);
 
+    const pro = db.select('*').from('users');
+    console.log("database", pro);
     console.log(" transition satarting now");
     db.transaction(trx => {
       console.log("insde transition");
