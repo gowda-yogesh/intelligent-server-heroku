@@ -22,7 +22,7 @@ express()
 
     // res.json("signin page open ");
     console.log("post signin ", ++p);
-    console.log("signin req.body", JSON.parse(req.body));
+    // console.log("signin req.body", JSON.parse(req.body));
 
     console.log(req.body);
 
