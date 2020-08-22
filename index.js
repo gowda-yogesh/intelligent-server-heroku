@@ -79,7 +79,9 @@ express()
     // console.log("correct", correct);
     // console.log("worng", wrong);
 
+    console.log(" transition satarting now");
     db.transaction(trx => {
+      console.log("insde transition");
       trx.insert({
         hash: password,
         email: email
@@ -88,6 +90,7 @@ express()
         .returning('email')
         .then(loginEmail => {
           //return is extremely imp else program hangs;
+          console.log("trnasition commplte and connection to users");
           return trx('users')
             .returning('*')
             .insert({
