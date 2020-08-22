@@ -34,7 +34,7 @@ express()
         console.log("hash value  = ", user);
         console.log("hash value  = ", user[0].hash);
         // const isValid = bcrypt.compareSync(req.body.password, user[0].hash);
-        const isValid;
+        let isValid;
         if (user[[0].hash === req.body.password]) {
           isValid = true;
         } else {
